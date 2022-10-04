@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# Green Cuts
 
-## Setup
-
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+## About
+Green Cuts is a highly configurable sapling auto-planing mod. It has a chance to plant
+saplings when they fall from trees.
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This mod is available under the MIT license.
