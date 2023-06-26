@@ -29,15 +29,15 @@ public abstract class ItemEntityMixin extends Entity implements AutoPlantable
     @Inject( method = "tick", at = @At("HEAD"))
     void onTick(CallbackInfo ci)
     {
-        if(!this.world.isClient && GreenCuts.getConfig().getEnabled() && !triedPlanting())
+        if(!getWorld().isClient && GreenCuts.getConfig().getEnabled() && !triedPlanting())
         {
             if( GreenCutsUtils.isSaplingStack(this.getStack()) )
             {
                 if(this.itemAge >= GreenCuts.getConfig().getAutoPlantTicks())
                 {
-                    ServerWorld srvWorld = (ServerWorld) world;
+                    ServerWorld srvWorld = (ServerWorld) getWorld();
                     BlockState state = Block.getBlockFromItem(this.getStack().getItem()).getDefaultState();
-                    if(state.getBlock().canPlaceAt(state, world, getBlockPos()) && world.getBlockState(getBlockPos()).isAir())
+                    if(state.getBlock().canPlaceAt(state, getWorld(), getBlockPos()) && getWorld().getBlockState(getBlockPos()).isAir())
                     {
                         if (GreenCutsUtils.tryPlanting(state.getBlock(), srvWorld, this.getBlockPos()))
                         {
