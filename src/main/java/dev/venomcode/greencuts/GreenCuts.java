@@ -13,15 +13,14 @@ import static com.mojang.text2speech.Narrator.LOGGER;
 
 public class GreenCuts implements ModInitializer {
     public static final String MODID = "greencuts";
-
-    private static GreenCutsConfig config;
     private static Logger logger;
 
     @Override
     public void onInitialize( )
     {
         logger = new Logger(Logger.Level.INFO);
-        config = new GreenCutsConfig();
+        GreenCutsConfig tmp = getConfig();
+        saveConfig();
     }
 
 
