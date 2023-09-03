@@ -1,7 +1,6 @@
 plugins {
 	id 'fabric-loom' version '1.2-SNAPSHOT'
 	id 'maven-publish'
-	id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 version = project.mod_version
@@ -20,6 +19,7 @@ repositories {
 
 	mavenCentral();
 	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -31,8 +31,9 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	include(modImplementation("maven.modrinth:server-api:${project.serverapi_version}"))
+
 	include(modImplementation('me.lucko:fabric-permissions-api:0.2-SNAPSHOT'))
-	shadow(implementation('org.spongepowered:configurate-hocon:4.1.2'))
 }
 
 processResources {
@@ -61,15 +62,6 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
-}
-shadowJar {
-	configurations = [project.configurations.shadow]
-	archiveClassifier.set("dev")
-	relocate "net.objecthunter", "de.siphalor.spiceoffabric.shadow.net.objecthunter"
-}
-remapJar {
-	dependsOn(shadowJar)
-	inputFile = tasks.shadowJar.archiveFile
 }
 
 // configure the maven publication
